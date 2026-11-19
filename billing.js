@@ -3,9 +3,14 @@ billing.js – початковий код (містить Common, Control та 
 let GLOBAL_TAX_RATE = 0.20;
 
 // Дефект 2 (Stamp Coupling): функція отримує повний об'єкт користувача замість рядка city
-function calculateDeliveryCost(customerProfile, weightKg) {
-    const baseRate = customerProfile.city === "Ivano-Frankivsk" ? 50.0 : 110.0;
-    return baseRate + (weightKg * 15.0);
+function calculateDeliveryCost(city, weightKg) {
+  let baseRate = 110.0;
+  if (city === "Ivano-Frankivsk") {
+    baseRate = 50.0;
+  } else if (city === "Kyiv") {
+    baseRate = 80.0;
+  }
+  return baseRate + (weightKg * 15.0);
 }
 
 // Дефект 3 (Control Coupling): числовий прапорець modeFlag перемикає бізнес-логіку всередині
